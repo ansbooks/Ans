@@ -1,91 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ANS — हिंदी किताबें</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANS Books</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f5f6fa;color:#171717;font-family:Arial,sans-serif}
-header{position:sticky;top:0;z-index:4;background:#fff;padding:13px 5%;display:flex;align-items:center;gap:12px;box-shadow:0 2px 12px #0002}
-.brand{font-size:22px;font-weight:800;white-space:nowrap}.brand small{display:block;font-size:10px;color:#777;font-weight:500}
-input,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:10px;font-size:16px}
-header input{max-width:420px;margin-left:auto}
-main{max-width:1000px;margin:auto;padding:20px 5% 60px}.hero{padding:28px;border-radius:20px;background:#e9e9ee;margin-bottom:28px}.hero h1{margin:0 0 8px;font-size:29px}
-.hero p{margin:0;color:#555}.books{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.card{background:#fff;padding:14px;border-radius:16px;box-shadow:0 2px 12px #0001}
-.cover{height:145px;border-radius:12px;background:#ddd;display:grid;place-items:center;font-size:58px}.card h3{margin:10px 0 4px}.muted{color:#666;margin:3px 0}
-button{border:0;border-radius:10px;padding:10px 13px;font-size:15px;cursor:pointer}.read{width:100%;margin-top:10px;background:#222;color:#fff}.adminBtn{background:#eee}
-.reader{display:none;position:fixed;inset:0;background:#fff;overflow:auto;z-index:10}.reader.open{display:block}
-.top{position:sticky;top:0;background:#fff;padding:12px 5%;display:flex;justify-content:space-between;box-shadow:0 2px 8px #0002}.top button{margin-left:5px}
-article{max-width:760px;margin:25px auto;padding:0 20px;font-size:20px;line-height:2}
-.admin{display:none;background:#fff;padding:18px;border-radius:16px;box-shadow:0 2px 12px #0001;margin-bottom:25px}.admin.show{display:block}.admin h2{margin-top:0}
-.form{display:grid;gap:10px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.danger{background:#fee;color:#a00}
-.empty{padding:25px;text-align:center;color:#666}.dark{background:#181818;color:#eee}.dark .reader,.dark .top,.dark .admin{background:#202020;color:#eee}
-@media(max-width:600px){.books{grid-template-columns:1fr}.row{grid-template-columns:1fr}.hero h1{font-size:24px}header{flex-wrap:wrap}header input{max-width:none;order:3}.brand{font-size:21px}}
+body{
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+margin:0;
+padding:20px;
+}
+h1{
+text-align:center;
+}
+.book{
+max-width:500px;
+margin:20px auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+a{
+display:inline-block;
+padding:10px 20px;
+background:#000;
+color:#fff;
+text-decoration:none;
+border-radius:6px;
+}
 </style>
 </head>
 <body>
-<header>
-<div class="brand">📚 ANS <small>हिंदी पुस्तक</small></div>
-<input id="search" placeholder="किताब खोजें...">
-<button class="adminBtn" onclick="toggleAdmin()">🛠️ Admin</button>
-</header>
 
-<main>
-<section class="hero"><h1>ANS पर हिंदी किताबें पढ़ें</h1><p>कहानियाँ, उपन्यास और ज्ञानवर्धक पुस्तकें — एक जगह।</p></section>
+<h1>📚 ANS Books</h1>
 
-<section id="admin" class="admin">
-<h2>🛠️ ANS Admin Panel</h2>
-<p class="muted">यह अभी आपके फोन पर local demo है। नीचे से किताब जोड़कर तुरंत सूची में देख सकते हैं।</p>
-<div class="form">
-<input id="title" placeholder="किताब का नाम">
-<div class="row"><input id="author" placeholder="लेखक का नाम"><input id="desc" placeholder="छोटा विवरण"></div>
-<textarea id="body" rows="7" placeholder="किताब/अध्याय का टेक्स्ट लिखें..."></textarea>
-<button onclick="addBook()">➕ किताब जोड़ें</button>
-</div>
-</section>
+<div class="book">
+<h2>📖 नई शुरुआत</h2>
+<p>लेखक: ANS</p>
+<p>एक प्रेरणादायक कहानी</p>
 
-<h2>📚 सभी किताबें</h2>
-<div id="books" class="books"></div>
-</main>
+<a href="books/nayi-shuruaat/chapter1.html">📖 पढ़ें</a>
 
-<div id="reader" class="reader">
-<div class="top"><button onclick="closeReader()">← वापस</button><div><button onclick="changeFont(-2)">A−</button><button onclick="changeFont(2)">A+</button><button onclick="document.body.classList.toggle('dark')">🌙</button></div></div>
-<article id="text"></article>
 </div>
 
-<script>
-const starter=[
-{title:"नई सुबह",author:"ANS",desc:"प्रेरणादायक कहानी",body:"सुबह की पहली किरण खिड़की से कमरे में आई। रवि ने आँखें खोलीं और तय किया कि आज वह कल से बेहतर करेगा।\\n\\nहर दिन एक नया अवसर होता है। छोटी शुरुआत भी आगे चलकर बड़ी सफलता बन सकती है।"},
-{title:"हिंदी कहानियाँ",author:"ANS",desc:"रोचक कहानियों का संग्रह",body:"एक गाँव में एक बच्चा रहता था। उसे किताबें पढ़ना बहुत पसंद था। एक दिन उसे एक पुरानी किताब मिली और उसमें उसे एक नई दुनिया दिखाई दी।"},
-{title:"ज्ञान की बातें",author:"ANS",desc:"जीवन और सीख",body:"सीखना कभी बंद नहीं करना चाहिए। सवाल पूछना, पढ़ना और अभ्यास करना हमें बेहतर बनाता है।"}
-];
-let books=JSON.parse(localStorage.getItem("ans_books")||"null")||starter;
-let size=20;
-
-function save(){localStorage.setItem("ans_books",JSON.stringify(books))}
-function render(list=books){
- const el=document.getElementById("books");
- if(!list.length){el.innerHTML='<div class="empty">कोई किताब नहीं मिली।</div>';return}
- el.innerHTML=list.map((b,i)=>`<div class="card"><div class="cover">📖</div><h3>${esc(b.title)}</h3><p class="muted">${esc(b.author)}</p><p class="muted">${esc(b.desc)}</p><button class="read" onclick="openBook(${books.indexOf(b)})">📖 पढ़ें</button></div>`).join("");
-}
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function openBook(i){
- const b=books[i];
- document.getElementById("text").innerHTML="<h1>"+esc(b.title)+"</h1><p><b>लेखक:</b> "+esc(b.author)+"</p>"+b.body.split(/\\n\\n/).map(x=>"<p>"+esc(x).replace(/\\n/g,"<br>")+"</p>").join("");
- document.getElementById("reader").classList.add("open");scrollTo(0,0);
-}
-function closeReader(){document.getElementById("reader").classList.remove("open")}
-function changeFont(n){size=Math.max(15,Math.min(32,size+n));document.getElementById("text").style.fontSize=size+"px"}
-function toggleAdmin(){document.getElementById("admin").classList.toggle("show")}
-function addBook(){
- const title=document.getElementById("title").value.trim(),author=document.getElementById("author").value.trim()||"ANS",desc=document.getElementById("desc").value.trim()||"हिंदी पुस्तक",body=document.getElementById("body").value.trim();
- if(!title||!body){alert("किताब का नाम और टेक्स्ट भरें।");return}
- books.unshift({title,author,desc,body});save();render();
- ["title","author","desc","body"].forEach(id=>document.getElementById(id).value="");
- alert("किताब ANS में जोड़ दी गई!");
-}
-document.getElementById("search").oninput=function(){let q=this.value.toLowerCase();render(books.filter(b=>(b.title+b.author+b.desc).toLowerCase().includes(q)))};
-render();
-</script>
 </body>
 </html>
